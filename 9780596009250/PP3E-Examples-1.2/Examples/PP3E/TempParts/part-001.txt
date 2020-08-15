@@ -1,0 +1,6 @@
+Multiple media attachments.  On my Windows laptop, text files open in 
+PyEdit pop-ups, PDF in acrobat, JPEG images in Windows image viewer,
+HTML in Firefox, DOC in MS-Word, and audio and video files in Windows
+Media Player.  On some platforms, web broswer open more media.
+
+--Mark Lutz  (http://www.rmi.net/~lutz)

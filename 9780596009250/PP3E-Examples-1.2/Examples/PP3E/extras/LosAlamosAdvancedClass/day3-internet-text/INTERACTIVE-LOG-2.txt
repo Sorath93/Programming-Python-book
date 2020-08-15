@@ -1,0 +1,991 @@
+Python 2.4 (#60, Nov 30 2004, 11:49:19) [MSC v.1310 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+
+    ****************************************************************
+    Personal firewall software may warn about the connection IDLE
+    makes to its subprocess using this computer's internal loopback
+    interface.  This connection is not visible on any external
+    interface and no data is sent to or received from the Internet.
+    ****************************************************************
+    
+IDLE 1.1      
+>>> import shelve
+>>> help(shelve.open)
+Help on function open in module shelve:
+
+open(filename, flag='c', protocol=None, writeback=False, binary=None)
+    Open a persistent dictionary for reading and writing.
+    
+    The filename parameter is the base filename for the underlying
+    database.  As a side-effect, an extension may be added to the
+    filename and more than one file may be created.  The optional flag
+    parameter has the same interpretation as the flag parameter of
+    anydbm.open(). The optional protocol parameter specifies the
+    version of the pickle protocol (0, 1, or 2).
+    
+    The optional binary parameter is deprecated and may be set to True
+    to force the use of binary pickles for serializing data values.
+    
+    See the module's __doc__ string for an overview of the interface.
+
+>>> ================================ RESTART ================================
+>>> 
+>>> import shelve
+>>> db = shelve.open('peopledb')
+>>> db.keys()
+['Bob Smith', 'Sue Jones', 'Ann Smite']
+>>> len(db)
+3
+>>> db['Bob Smith']
+{'job': ['dev', 'mgr'], 'age': 40, 'name': 'Bob Smith'}
+>>> db['Bob Smith']['name'].split()
+['Bob', 'Smith']
+>>> 
+>>> db['Bob Smith']['name'] = 'JOhn Doh'
+KeyboardInterrupt
+>>> 
+>>> 
+>>> bob = db['Bob Smith']
+>>> bob['name'] = 'John Doh'
+>>> db['Bob Smith'] = bob
+>>> ================================ RESTART ================================
+>>> 
+>>> db = shelve.open('peopledb')
+>>> db.keys()
+['Bob Smith', 'Sue Jones', '0', 'Ann Smite']
+>>> imoprt os
+SyntaxError: invalid syntax
+>>> 
+>>> 
+>>> import os
+>>> os.remove('peopledb')
+
+Traceback (most recent call last):
+  File "<pyshell#20>", line 1, in -toplevel-
+    os.remove('peopledb')
+OSError: [Errno 13] Permission denied: 'peopledb'
+>>> 
+>>> ================================ RESTART ================================
+>>> 
+>>> db = shelve.open('peopledb')
+>>> db.keys()
+['Bob Smith', 'Sue Jones', '0', '2', 'Ann Smite', '1']
+>>> 
+>>> ================================ RESTART ================================
+>>> 
+
+Traceback (most recent call last):
+  File "C:/Python24/Lib/idlelib/makepeople.py", line 12, in -toplevel-
+    dbfile[rec[name]] = rec
+NameError: name 'name' is not defined
+>>> ================================ RESTART ================================
+>>> 
+>>> db = shelve.open('peopledb2')
+>>> 
+>>> db.keys()
+['Bob Smith', 'Sue Jones', 'Ann Smite']
+>>> db['Bob Smith']
+{'job': ['dev', 'mgr'], 'age': 40, 'name': 'Bob Smith'}
+>>> bob = db['Bob Smith']
+>>> bob['name'] = 'Loretta'
+>>> db['Bob Smith'] = bob
+>>> db.close()
+>>> 
+>>> db = shelve.open('peopledb2')
+>>> db.keys()
+['Bob Smith', 'Sue Jones', 'Ann Smite']
+>>> db['Bob Smith']
+{'job': ['dev', 'mgr'], 'age': 40, 'name': 'Loretta'}
+>>> 
+>>> del db['Bob Smith']
+>>> db['Bob Smith'] = db['Sue Jones']
+>>> db.close()
+>>> 
+>>> db = shelve.open('peopledb2')
+>>> db.keys()
+['Sue Jones', 'Bob Smith', 'Ann Smite']
+>>> 
+>>> for rec in db.values():
+	print rec
+
+	
+{'job': ['dev'], 'age': 35, 'name': 'Sue Jones'}
+{'job': ['dev'], 'age': 35, 'name': 'Sue Jones'}
+{'job': ['admin', 'dev'], 'age': 45, 'name': 'Ann Smite'}
+>>> ================================ RESTART ================================
+>>> 
+>>> ================================ RESTART ================================
+>>> 
+>>> db = shelve.open('peopledb3')
+>>> db.keys()
+['0', '2', '1']
+>>> db['1']
+<__main__.People instance at 0x00B41C10>
+>>> db['1'].name
+'Sue Jone'
+>>> db['1'].lastName()
+'Jone'
+>>> 
+>>> db = shelve.open('peopledb3')
+>>> db.keys()
+['0', '2', '1']
+>>> db['1'].lastName()
+'Jone'
+>>> import
+SyntaxError: invalid syntax
+>>> import c lassdb
+SyntaxError: invalid syntax
+>>> 
+>>> import classdb
+>>> reload(classdb)
+<module 'classdb' from 'C:/Python24/Lib/idlelib\classdb.pyc'>
+
+>>> 
+>>> db = shelve.open('peopledb3')
+>>> db['1'].lastName()
+'JONE'
+>>> ================================ RESTART ================================
+>>> 
+>>> import shelve
+>>> db = shelve.open('peopledb4')
+>>> db.keys()
+['0', '2', '1']
+>>> db['0'].name
+'Bob Smith'
+>>> 
+>>> reload(classdb)
+
+Traceback (most recent call last):
+  File "<pyshell#70>", line 1, in -toplevel-
+    reload(classdb)
+NameError: name 'classdb' is not defined
+>>> 
+>>> imporrt classdb
+SyntaxError: invalid syntax
+>>> import classdb
+>>> reload(classdb)
+<module 'classdb' from 'C:/Python24/Lib/idlelib\classdb.py'>
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> db = shelve.open('peopledb4')
+>>> db.keys()
+['0', '2', '1']
+>>> 
+>>> db['0']
+<classdb.People instance at 0x00B67BC0>
+>>> db['0'].name
+'Bob Smith'
+>>> 
+>>> db['0'].changeName('Loretta')
+>>> 
+>>> rec = db['0']
+>>> rec.changeName('Loretta')
+>>> db['0'] = rec
+>>> db.close()
+>>> 
+>>> db = shelve.open('peopledb4')
+>>> db.keys()
+['0', '2', '1']
+>>> db['0'].name
+'Loretta'
+>>> 
+
+
+>>> 
+
+>>> from email.Message import Message
+>>> mail = Message()
+>>> mail['From'] = 'Eric@halfabee.com'
+>>> mail['To']   = 'bob@bob.com, lutz@rmi.net'
+>>> mail['Subject'] = 'Spam'
+>>> 
+>>> mail.set_payload("Message text goes here...')
+		 
+SyntaxError: EOL while scanning single-quoted string
+>>> 
+>>> mail.set_payload("Message text goes here...")
+>>> 
+>>> fulltext = str(mail)
+>>> print fulltext
+From nobody Wed Jul 12 10:10:35 2006
+From: Eric@halfabee.com
+To: bob@bob.com, lutz@rmi.net
+Subject: Spam
+
+Message text goes here...
+>>> 
+>>> fultext
+
+Traceback (most recent call last):
+  File "<pyshell#114>", line 1, in -toplevel-
+    fultext
+NameError: name 'fultext' is not defined
+>>> fulltext
+'From nobody Wed Jul 12 10:10:35 2006\nFrom: Eric@halfabee.com\nTo: bob@bob.com, lutz@rmi.net\nSubject: Spam\n\nMessage text goes here...'\
+>>> 
+>>> 
+>>> 
+>>> 
+>>> from email.Parser import Parser
+>>> mail2 = Parser().parsestr(fulltext)
+>>> mail2
+<email.Message.Message instance at 0x00B9CA30>
+>>> mail2['Subject']
+'Spam'
+>>> mail2['From']
+'Eric@halfabee.com'
+>>> 
+>>> mail.get_payload()
+'Message text goes here...'
+>>> 
+>>> 
+>>> mail2
+<email.Message.Message instance at 0x00B9CA30>
+>>> 
+>>> 
+>>> str(mail2)
+'From nobody Wed Jul 12 10:10:35 2006\nFrom: Eric@halfabee.com\nTo: bob@bob.com, lutz@rmi.net\nSubject: Spam\n\nMessage text goes here...'
+>>> 
+>>> from smtplib import SMTP
+>>> srvr = SMTP('smtp.comcast.net')
+>>> dir(srvr)
+['__doc__', '__init__', '__module__', 'close', 'connect', 'data', 'debuglevel', 'docmd', 'does_esmtp', 'ehlo', 'ehlo_resp', 'esmtp_features', 'expn', 'file', 'getreply', 'has_extn', 'helo', 'helo_resp', 'help', 'local_hostname', 'login', 'mail', 'noop', 'putcmd', 'quit', 'rcpt', 'rset', 'send', 'sendmail', 'set_debuglevel', 'sock', 'starttls', 'verify', 'vrfy']
+>>> 
+>>> srvr.sendmail('Eric@spam.com', ['bob@bob.com', 'sue@sue.com'], str(mail))
+
+Traceback (most recent call last):
+  File "<pyshell#138>", line 1, in -toplevel-
+    srvr.sendmail('Eric@spam.com', ['bob@bob.com', 'sue@sue.com'], str(mail))
+  File "C:\Python24\lib\smtplib.py", line 677, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+SMTPSenderRefused: (530, 'Authentication required', 'Eric@spam.com')
+>>> 
+>>> 
+KeyboardInterrupt
+>>> 
+>>> 
+>>> 
+>>> import urllib
+>>> reply = urllib.urlopen('http://www.python.org').read()
+>>> 
+>>> print reply[:1000]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>Python Programming Language -- Official Website</title>
+<meta content="python programming language object oriented web free source" name="keywords" />
+<meta content="Home page for Python, an interpreted, interactive, object-oriented, extensible programming language. It provides an extraordinary combination of clarity and versatility, and is free and comprehensively ported.
+" name="description" />
+<link href="http://www.python.org/channews.rdf" type="application/rss+xml" rel="alternate" title="RSS" />
+<link media="screen" href="styles/screen-switcher-default.css" type="text/css" id="screen-switcher-stylesheet" rel="stylesheet" />
+<link media="scReen" href="styles/netscape4.css" type="text/css" rel="stylesheet" />
+<lin
+>>> 
+>>> reply = urllib.urlopen('http://www.python.org?name=Bob&age=100').read()
+KeyboardInterrupt
+>>> import htmllib
+>>> import urllib2
+>>> import cookielib
+>>> 
+>>> 
+>>> 
+>>> import cgi
+>>> cgi.escape('<')
+'&lt;'
+>>> 
+>>> 
+>>> reply = urllib.urlopen('http://localhost:8080/cgi-bin/cgi101.py?user='Guido').read()
+		       
+SyntaxError: invalid syntax
+>>> reply = urllib.urlopen('http://localhost:8080/cgi-bin/cgi101.py?user=Guido').read()
+>>> reply
+'<title>Reply Page</title>\n<h1>Hello <i>Guido</i>!</h1>\n'
+>>> 
+
+>>> line = '111.0,222.2,333.3'
+>>> line.split()
+['111.0,222.2,333.3']
+>>> line.split(',')
+['111.0', '222.2', '333.3']
+>>> 
+>>> float('111.0')
+111.0
+>>> 
+>>> for line in open("data.txt'):
+		 
+SyntaxError: EOL while scanning single-quoted string
+>>> for line in open('data.txt'):
+	print line.split(',')
+
+	
+['111.0', '222.0', '333.0\n']
+['10.1', '20.1', '30.', '1\n']
+['1000', '2000', '3000\n']
+>>> 
+>>> x = 99
+>>> print x, type(x)
+99 <type 'int'>
+>>> x = 99.99
+>>> print x, type(x)
+99.99 <type 'float'>
+>>> 
+>>> D = {"a':1, 'b':2}
+     
+SyntaxError: EOL while scanning single-quoted string
+>>> 
+>>> D = {'a':1, 'b':2}
+>>> D['c']
+
+Traceback (most recent call last):
+  File "<pyshell#181>", line 1, in -toplevel-
+    D['c']
+KeyError: 'c'
+>>> 
+>>> D.get('c', 0)
+0
+>>> D.get('c', 'MIssing')
+'MIssing'
+>>> 
+>>> f = open('data.txt')
+>>> f.readline()
+'111.0,222.0,333.0\n'
+>>> f.readlines()
+['10.1,20.1,30.1\n', '1000,2000,3000\n']
+>>> 
+>>> 
+>>> f = open('data.txt')
+>>> f.readline()
+'111.0,222.0,333.0\n'
+>>> f.readline()
+'10.1,20.1,30.1\n'
+>>> f.readline()
+'1000,2000,3000\n'
+>>> f.readline()
+''
+>>> f = open('data.txt')
+>>> f.next()
+'111.0,222.0,333.0\n'
+>>> f.next()
+'10.1,20.1,30.1\n'
+>>> f.next()
+'1000,2000,3000\n'
+>>> f.next()
+
+Traceback (most recent call last):
+  File "<pyshell#200>", line 1, in -toplevel-
+    f.next()
+StopIteration
+>>> 
+>>> for line in open('data.txt'):
+	print line
+
+	
+111.0,222.0,333.0
+
+10.1,20.1,30.1
+
+1000,2000,3000
+
+>>> ================================ RESTART ================================
+>>> 
+['111.0', '222.0', '333.0\n']
+['10.1', '20.1', '30.1\n']
+['1000', '2000', '3000\n']
+>>> 
+>>> float('111.0')
+111.0
+>>> 
+>>> map(lambda x: float(x), ['111.0', '222.0', '333.0\n'])
+[111.0, 222.0, 333.0]
+>>> 
+>>> [float(x) for x in ['111.0', '222.0', '333.0\n']]
+[111.0, 222.0, 333.0]
+>>> 
+>>> help(float)
+Help on class float in module __builtin__:
+
+class float(object)
+ |  float(x) -> floating point number
+ |  
+ |  Convert a string or number to a floating point number, if possible.
+ |  
+ |  Methods defined here:
+ |  
+ |  __abs__(...)
+ |      x.__abs__() <==> abs(x)
+ |  
+ |  __add__(...)
+ |      x.__add__(y) <==> x+y
+ |  
+ |  __coerce__(...)
+ |      x.__coerce__(y) <==> coerce(x, y)
+ |  
+ |  __div__(...)
+ |      x.__div__(y) <==> x/y
+ |  
+ |  __divmod__(...)
+ |      x.__divmod__(y) <==> xdivmod(x, y)y
+ |  
+ |  __eq__(...)
+ |      x.__eq__(y) <==> x==y
+ |  
+ |  __float__(...)
+ |      x.__float__() <==> float(x)
+ |  
+ |  __floordiv__(...)
+ |      x.__floordiv__(y) <==> x//y
+ |  
+ |  __ge__(...)
+ |      x.__ge__(y) <==> x>=y
+ |  
+ |  __getattribute__(...)
+ |      x.__getattribute__('name') <==> x.name
+ |  
+ |  __getnewargs__(...)
+ |  
+ |  __gt__(...)
+ |      x.__gt__(y) <==> x>y
+ |  
+ |  __hash__(...)
+ |      x.__hash__() <==> hash(x)
+ |  
+ |  __int__(...)
+ |      x.__int__() <==> int(x)
+ |  
+ |  __le__(...)
+ |      x.__le__(y) <==> x<=y
+ |  
+ |  __long__(...)
+ |      x.__long__() <==> long(x)
+ |  
+ |  __lt__(...)
+ |      x.__lt__(y) <==> x<y
+ |  
+ |  __mod__(...)
+ |      x.__mod__(y) <==> x%y
+ |  
+ |  __mul__(...)
+ |      x.__mul__(y) <==> x*y
+ |  
+ |  __ne__(...)
+ |      x.__ne__(y) <==> x!=y
+ |  
+ |  __neg__(...)
+ |      x.__neg__() <==> -x
+ |  
+ |  __nonzero__(...)
+ |      x.__nonzero__() <==> x != 0
+ |  
+ |  __pos__(...)
+ |      x.__pos__() <==> +x
+ |  
+ |  __pow__(...)
+ |      x.__pow__(y[, z]) <==> pow(x, y[, z])
+ |  
+ |  __radd__(...)
+ |      x.__radd__(y) <==> y+x
+ |  
+ |  __rdiv__(...)
+ |      x.__rdiv__(y) <==> y/x
+ |  
+ |  __rdivmod__(...)
+ |      x.__rdivmod__(y) <==> ydivmod(y, x)x
+ |  
+ |  __repr__(...)
+ |      x.__repr__() <==> repr(x)
+ |  
+ |  __rfloordiv__(...)
+ |      x.__rfloordiv__(y) <==> y//x
+ |  
+ |  __rmod__(...)
+ |      x.__rmod__(y) <==> y%x
+ |  
+ |  __rmul__(...)
+ |      x.__rmul__(y) <==> y*x
+ |  
+ |  __rpow__(...)
+ |      y.__rpow__(x[, z]) <==> pow(x, y[, z])
+ |  
+ |  __rsub__(...)
+ |      x.__rsub__(y) <==> y-x
+ |  
+ |  __rtruediv__(...)
+ |      x.__rtruediv__(y) <==> y/x
+ |  
+ |  __str__(...)
+ |      x.__str__() <==> str(x)
+ |  
+ |  __sub__(...)
+ |      x.__sub__(y) <==> x-y
+ |  
+ |  __truediv__(...)
+ |      x.__truediv__(y) <==> x/y
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __new__ = <built-in method __new__ of type object>
+ |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+
+>>> x
+'333.0\n'
+>>> 
+>>> 
+>>> 
+>>> line = ['111.0', '222.0', '333.0\n']
+>>> 
+>>> [eval(x) for x in line]
+[111.0, 222.0, 333.0]
+>>> 
+>>> line = ['111.0 + 999', '222.0 ** 2', '333.0 / 2\n']
+>>> [eval(x) for x in line]
+[1110.0, 49284.0, 166.5]
+>>> 
+>>> line = ['os.system("rm -rf *")', '222.0 ** 2', '333.0 / 2\n']
+KeyboardInterrupt
+>>> 
+>>> line = ['111.0', '222.0', '333.0\n']
+>>> res = []
+>>> for x in line:
+	res.append(float(x))
+
+	
+>>> res
+[111.0, 222.0, 333.0]
+>>> 
+>>> nums= [float(x) for x in ['111.0', '222.0', '333.0\n']]
+>>> nums
+[111.0, 222.0, 333.0]
+>>> 
+>>> map(lambda x: float(x), ['111.0', '222.0', '333.0\n'])
+[111.0, 222.0, 333.0]
+>>> 
+>>> map(float, line)
+[111.0, 222.0, 333.0]
+>>> 
+>>> [0] * 3
+[0, 0, 0]
+>>> ================================ RESTART ================================
+>>> 
+[1121.0999999999999, 2242.0999999999999, 3363.0999999999999]
+>>> ================================ RESTART ================================
+>>> 
+[1121.0999999999999, 2242.0999999999999, 3363.0999999999999]
+>>> ================================ RESTART ================================
+>>> 
+[1121.0999999999999, 2242.0999999999999, 3363.0999999999999]
+>>> ================================ RESTART ================================
+>>> 
+{0: 1121.0999999999999, 1: 2242.0999999999999, 2: 3363.0999999999999}
+>>> ================================ RESTART ================================
+>>> 
+{0: 1121.0999999999999, 1: 2242.0999999999999, 2: 3363.0999999999999, 3: 40.399999999999999}
+>>> ================================ RESTART ================================
+>>> 
+0 = 1121.1
+1 = 2242.1
+2 = 3363.1
+3 = 40.4
+>>> 
+>>> D
+
+Traceback (most recent call last):
+  File "<pyshell#241>", line 1, in -toplevel-
+    D
+NameError: name 'D' is not defined
+>>> 
+>>> D = {'a':1, 'b':2}
+>>> D['c']
+
+Traceback (most recent call last):
+  File "<pyshell#244>", line 1, in -toplevel-
+    D['c']
+KeyError: 'c'
+>>> 
+>>> 
+>>> D.get('c', 0)
+0
+>>> ================================ RESTART ================================
+>>> 
+0 = 1121.1
+1 = 2242.1
+2 = 3363.1
+3 = 40.4
+>>> ================================ RESTART ================================
+>>> 
+0 = 1121.1
+1 = 2242.1
+2 = 3363.1
+3 = 40.4
+>>> 
+>>> 
+>>> line = 'rule 42 if a, b then c, d'
+>>> 
+>>> left, right = line.split('if')
+>>> left
+'rule 42 '
+>>> right
+' a, b then c, d'
+>>> left.split('rule')
+['', ' 42 ']
+>>> 
+>>> lpart, rpart = right.plit('then')
+
+Traceback (most recent call last):
+  File "<pyshell#257>", line 1, in -toplevel-
+    lpart, rpart = right.plit('then')
+AttributeError: 'str' object has no attribute 'plit'
+>>> 
+>>> lpart, rpart = right.split('then')
+>>> lpart, rpart
+(' a, b ', ' c, d')
+>>> lpart(',')
+
+Traceback (most recent call last):
+  File "<pyshell#261>", line 1, in -toplevel-
+    lpart(',')
+TypeError: 'str' object is not callable
+>>> lpart.split(',')
+[' a', ' b ']
+>>> 
+>>> 
+>>> 
+>>> reply = urllib.urlopen('http://localhost:8080/cgi-bin/cgi101.py?user='Guido').read()
+		       
+SyntaxError: invalid syntax
+>>> 
+>>> reply = urllib.urlopen('http://localhost:8080/cgi-bin/cgi101.py?user=Guido').read()
+
+Traceback (most recent call last):
+  File "<pyshell#268>", line 1, in -toplevel-
+    reply = urllib.urlopen('http://localhost:8080/cgi-bin/cgi101.py?user=Guido').read()
+NameError: name 'urllib' is not defined
+>>> 
+>>> import urllib
+>>> reply = urllib.urlopen('http://localhost:8080/cgi-bin/cgi101.py?user=Guido').read()
+>>> 
+>>> reply
+'<title>Reply Page</title>\n<h1>Hello <i>Guido</i>!</h1>\n'
+>>> 
+>>> import re
+>>> patt = '.*<h1>(.*)</h1>'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> print mobj
+None
+>>> patt = '.*<h1>(.*)</h1>.*'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> 
+>>> patt = '(.*)<h1>(.*)</h1>(.*)'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> 
+>>> patt = '.*\<h1>(.*)\</h1>.*'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> 
+>>> patt = '.*\<h1>(.*)\<\/h1>.*'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> patt = '.*\<h1\>(.*)\<\/h1\>.*'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> 
+>>> patt = '.?*<h1>(.*)</h1>'
+>>> mobj = re.match(patt, reply)
+
+Traceback (most recent call last):
+  File "<pyshell#300>", line 1, in -toplevel-
+    mobj = re.match(patt, reply)
+  File "C:\Python24\lib\sre.py", line 129, in match
+    return _compile(pattern, flags).match(string)
+  File "C:\Python24\lib\sre.py", line 227, in _compile
+    raise error, v # invalid expression
+error: multiple repeat
+>>> 
+>>> reply
+'<title>Reply Page</title>\n<h1>Hello <i>Guido</i>!</h1>\n'
+>>> 
+>>> patt = '.*?<h1>(.*?)</h1>.*'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> 
+>>> patt = '.*<h1>.*'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> 
+>>> patt = '.*h1.*'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> 
+>>> patt = '.*'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+<_sre.SRE_Match object at 0x00B9E528>
+>>> mobj.group(0)
+'<title>Reply Page</title>'
+>>> 
+>>> help(re.match)
+Help on function match in module sre:
+
+match(pattern, string, flags=0)
+    Try to apply the pattern at the start of the string, returning
+    a match object, or None if no match was found.
+
+>>> 
+>>> 
+>>> patt = '(?m).?*<h1>(.*)</h1>'
+>>> mobj = re.match(patt, reply)
+
+Traceback (most recent call last):
+  File "<pyshell#325>", line 1, in -toplevel-
+    mobj = re.match(patt, reply)
+  File "C:\Python24\lib\sre.py", line 129, in match
+    return _compile(pattern, flags).match(string)
+  File "C:\Python24\lib\sre.py", line 227, in _compile
+    raise error, v # invalid expression
+error: multiple repeat
+>>> 
+>>> 
+>>> patt = '(?m).*<h1>(.*)</h1>'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+>>> 
+>>> 
+>>> patt = '(?s).*<h1>(.*)</h1>'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+<_sre.SRE_Match object at 0x00B97EE0>
+>>> 
+>>> mobj.group(1)
+'Hello <i>Guido</i>!'
+>>> 
+>>> reply
+'<title>Reply Page</title>\n<h1>Hello <i>Guido</i>!</h1>\n'
+>>> 
+>>> patt = '.*<h1>(.*)</h1>'
+>>> mobj = re.match(patt, reply, re.S)
+>>> mobj
+<_sre.SRE_Match object at 0x00BA21A0>
+>>> mobj.group(1)
+'Hello <i>Guido</i>!'
+>>> 
+>>> 
+>>> patt = '(?s).*<h1>(.*)</h1>'
+>>> mobj = re.match(patt, reply)
+>>> mobj.group(1)
+'Hello <i>Guido</i>!'
+>>> 
+>>> patt = '(?s).*<title>(.*)</title>.*<h1>(.*)</h1>'
+>>> mobj = re.match(patt, reply)
+>>> mobj
+<_sre.SRE_Match object at 0x0116B2F0>
+>>> mobj.group(1)
+'Reply Page'
+>>> mobj.group(2)
+'Hello <i>Guido</i>!'
+>>> 
+>>> mobj.groups()
+('Reply Page', 'Hello <i>Guido</i>!')
+>>> 
+>>> reply
+'<title>Reply Page</title>\n<h1>Hello <i>Guido</i>!</h1>\n'
+>>> 
+>>> 
+>>> a = b = c = []
+>>> a.append(42)
+>>> b
+[42]
+>>> c
+[42]
+>>> 
+>>> 
+>>> L = [1, 2, 3]
+>>> M = [8, L, 9]
+>>> 
+>>> L.append(42)
+>>> M'
+SyntaxError: EOL while scanning single-quoted string
+>>> M
+[8, [1, 2, 3, 42], 9]
+>>> 
+>>> L = [1, 2, 3]
+>>> M = [8, L[:], 9]
+>>> 
+>>> L.append(42)
+>>> 
+>>> M
+[8, [1, 2, 3], 9]
+>>> 
+>>> L = [1, 2, 3]
+>>> import copy
+>>> M = [8, copy.deepcopy(L), 99]
+>>> 
+>>> help(copy.copy)
+Help on function copy in module copy:
+
+copy(x)
+    Shallow copy operation on arbitrary Python objects.
+    
+    See the module's __doc__ string for more info.
+
+>>> 
+>>> help(copy)
+Help on module copy:
+
+NAME
+    copy - Generic (shallow and deep) copying operations.
+
+FILE
+    c:\python24\lib\copy.py
+
+DESCRIPTION
+    Interface summary:
+    
+            import copy
+    
+            x = copy.copy(y)        # make a shallow copy of y
+            x = copy.deepcopy(y)    # make a deep copy of y
+    
+    For module specific errors, copy.Error is raised.
+    
+    The difference between shallow and deep copying is only relevant for
+    compound objects (objects that contain other objects, like lists or
+    class instances).
+    
+    - A shallow copy constructs a new compound object and then (to the
+      extent possible) inserts *the same objects* into in that the
+      original contains.
+    
+    - A deep copy constructs a new compound object and then, recursively,
+      inserts *copies* into it of the objects found in the original.
+    
+    Two problems often exist with deep copy operations that don't exist
+    with shallow copy operations:
+    
+     a) recursive objects (compound objects that, directly or indirectly,
+        contain a reference to themselves) may cause a recursive loop
+    
+     b) because deep copy copies *everything* it may copy too much, e.g.
+        administrative data structures that should be shared even between
+        copies
+    
+    Python's deep copy operation avoids these problems by:
+    
+     a) keeping a table of objects already copied during the current
+        copying pass
+    
+     b) letting user-defined classes override the copying operation or the
+        set of components copied
+    
+    This version does not copy types like module, class, function, method,
+    nor stack trace, stack frame, nor file, socket, window, nor array, nor
+    any similar types.
+    
+    Classes can use the same interfaces to control copying that they use
+    to control pickling: they can define methods called __getinitargs__(),
+    __getstate__() and __setstate__().  See the documentation for module
+    "pickle" for information on these methods.
+
+CLASSES
+    exceptions.Exception
+        Error
+    
+    class Error(exceptions.Exception)
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __getitem__(...)
+     |  
+     |  __init__(...)
+     |  
+     |  __str__(...)
+
+FUNCTIONS
+    copy(x)
+        Shallow copy operation on arbitrary Python objects.
+        
+        See the module's __doc__ string for more info.
+    
+    deepcopy(x, memo=None, _nil=[])
+        Deep copy operation on arbitrary Python objects.
+        
+        See the module's __doc__ string for more info.
+
+DATA
+    __all__ = ['Error', 'copy', 'deepcopy']
+
+
+>>> letting user-defined classes override the copying operation or the
+        set of components copied
+        
+SyntaxError: invalid syntax
+>>> 
+>>> 
+>>> 
+>>> L
+[1, 2, 3]
+>>> 
+>>> L = L.append(42)
+>>> 
+>>> print L
+None
+>>> 
+>>> D = {'a': 1, 'b': 2, 'c': 3}
+>>> 
+>>> for key in D.keys().sort():
+	print key, '=', D[key]
+
+	
+
+Traceback (most recent call last):
+  File "<pyshell#403>", line 1, in -toplevel-
+    for key in D.keys().sort():
+TypeError: iteration over non-sequence
+>>> 
+>>> for key in sorted(D):
+	print key, '=', D[key]
+
+	
+a = 1
+b = 2
+c = 3
+>>> 
+>>> sorted(D)
+['a', 'b', 'c']
+>>> reversed(D)
+
+Traceback (most recent call last):
+  File "<pyshell#409>", line 1, in -toplevel-
+    reversed(D)
+TypeError: argument to reversed() must be a sequence
+>>> 
+>>> reversed((1, 2, 3))
+<reversed object at 0x00B88470>
+>>> 
+>>> list(reversed((1, 2, 3)))
+[3, 2, 1]
+>>> 
+>>> def grow(a, b=None):
+	if b == None: b = []
+	b.append(a)
+	return b
+
+>>> grow(1)
+[1]
+>>> grow(1)
+[1]
+>>> grow(1)
+[1]
+>>> grow(1)
+[1]
+>>> grow(1)
+[1]
+>>> 

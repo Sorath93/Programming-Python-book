@@ -1,0 +1,19 @@
+<catalog>
+  <book isbn="0-596-00128-2">
+    <title>Python &amp; XML</title>
+    <author>Jones, Drake</author>
+  </book>
+  <book isbn="0-596-00085-5">
+    <title>Programming Python</title>
+    <author>Lutz</author>
+  </book>
+   <book isbn="0-596-00281-5">
+    <title>Learning Python</title>
+    <author>Lutz, Ascher</author>
+  </book>
+   <book isbn="0-596-00797-3">
+    <title>Python Cookbook</title>
+    <author>Martelli, Ravenscroft, Ascher</author>
+  </book>
+ <!-- imagine more entries here -->
+</catalog>

@@ -1,0 +1,44 @@
+# personnnel database
+
+#######
+#family
+#######
+
+<begin>
+name: Homer Simpson
+job: nuclear engineer
+age: 35
+zno: 0
+<end>
+
+# children
+<begin>
+name: bart
+job: hacker
+age: 12
+zno: 1
+<end>
+
+<begin>
+name: lisa
+job: president
+age: 10-ish
+zno: 2
+<end>
+
+<begin>
+name: maggie
+job: baby
+age: 2
+zno: 6
+<end>
+
+# spouse
+<begin>
+name: marge
+job: housewife/gambler
+age: 30
+zno: 666
+<end>
+
+

@@ -1,0 +1,17 @@
+# using the callback handler to parse
+
+>>> import xml.sax
+>>> import bookhandler
+>>> import pprint
+>>>
+>>> parser = xml.sax.make_parser()
+>>> handler = bookhandler.BookHandler()
+>>> parser.setContentHandler(handler)
+>>> parser.parse('books.xml')
+>>>
+>>> pprint.pprint(handler.mapping)
+{u'0-596-00085-5': u'Programming Python',
+ u'0-596-00128-2': u'Python & XML',
+ u'0-596-00281-5': u'Learning Python',
+ u'0-596-00797-3': u'Python Cookbook'}
+>>>

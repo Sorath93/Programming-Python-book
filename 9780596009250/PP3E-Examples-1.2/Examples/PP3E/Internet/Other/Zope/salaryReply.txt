@@ -1,0 +1,5 @@
+<dtml-var standard_html_header>
+<p>Your pay this week:
+    <b><dtml-var expr="calculateSalary(hours, rate)">
+</p>
+<dtml-var standard_html_footer>

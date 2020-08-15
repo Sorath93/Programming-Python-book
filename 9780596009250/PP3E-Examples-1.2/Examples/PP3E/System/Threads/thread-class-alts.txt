@@ -1,0 +1,18 @@
+# subclass with state
+class mythread(threading.Thread):
+    def __init__(self, myId, count):
+        self.i = i
+        threading.Thread.__init__(self)   
+    def run(self):
+        consumer(self.i)
+mythread().start()
+
+# pass action in 
+thread = threading.Thread(target=(lambda: consumer(i)))
+thread.start()
+
+# same but no lambda wrapper for state
+Threading.Thread(target=consumer, args=(i,)).start()
+
+# basic thread module
+thread.start_new_thread(consumer, (i,))

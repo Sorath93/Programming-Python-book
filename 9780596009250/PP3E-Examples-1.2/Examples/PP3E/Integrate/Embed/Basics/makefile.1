@@ -1,0 +1,13 @@
+# a cygwin makefile that builds a C executable that embeds 
+# Python, assuming no external module libs must be linked in;
+# uses Python header files, links in the Python lib file;
+# both may be in other dirs (e.g., /usr) in your install;
+
+PYLIB = /usr/bin
+PYINC = /usr/include/python2.4
+
+embed-simple: embed-simple.o
+	gcc embed-simple.o -L$(PYLIB) -lpython2.4 -g -o embed-simple
+
+embed-simple.o: embed-simple.c
+	gcc embed-simple.c -c -g -I$(PYINC)

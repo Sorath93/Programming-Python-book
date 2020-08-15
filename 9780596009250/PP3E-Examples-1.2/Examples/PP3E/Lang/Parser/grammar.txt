@@ -1,0 +1,22 @@
+goal -> <expr> END                       [number, variable, ( ]
+goal -> <assign> END                     [set]
+ 
+assign -> 'set' <variable> <expr>        [set]
+     
+expr -> <factor> <expr-tail>             [number, variable, ( ]
+ 
+expr-tail -> ^                           [END, ) ]
+expr-tail -> '+' <factor> <expr-tail>    [+]
+expr-tail -> '-' <factor> <expr-tail>    [-]
+     
+factor -> <term> <factor-tail>           [number, variable, ( ]
+     
+factor-tail -> ^                         [+, -, END, ) ]
+factor-tail -> '*' <term> <factor-tail>  [*]
+factor-tail -> '/' <term> <factor-tail>  [/]
+ 
+term -> <number>                         [number]
+term -> <variable>                       [variable]
+term -> '(' <expr> ')'                   [(]
+     
+tokens: (, ), num, var, -, +, /, *, set, end

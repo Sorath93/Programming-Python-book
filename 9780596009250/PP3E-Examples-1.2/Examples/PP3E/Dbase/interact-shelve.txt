@@ -1,0 +1,71 @@
+>>> import shelve
+>>> dbase = shelve.open("mydbase")
+>>> object1 = ['The', 'bright', ('side', 'of'), ['life']]
+>>> object2 = {'name': 'Brian', 'age': 33, 'motto': object1}
+>>> dbase['brian']  = object2
+>>> dbase['knight'] = {'name': 'Knight', 'motto': 'Ni!'}
+>>> dbase.close()
+
+
+
+>>> import shelve
+>>> dbase = shelve.open("mydbase")
+>>> len(dbase)                            # entries
+2
+     
+>>> dbase.keys()                          # index
+['knight', 'brian']
+     
+>>> dbase['knight']                       # fetch
+{'motto': 'Ni!', 'name': 'Knight'}
+     
+>>> for row in dbase.keys():
+...     print row, '=>'
+...     for field in dbase[row].keys():
+...         print '  ', field, '=', dbase[row][field]
+...
+knight =>
+   motto = Ni!
+   name = Knight
+brian =>
+   motto = ['The', 'bright', ('side', 'of'), ['life']]
+   age = 33
+   name = Brian
+
+
+
+>>> from person import Person
+>>> bob   = Person('bob', 'psychologist', 70000)
+>>> emily = Person('emily', 'teacher', 40000)
+>>>
+>>> import shelve
+>>> dbase = shelve.open('cast')          # make new shelve
+>>> for obj in (bob, emily):             # store objects
+>>>     dbase[obj.name] = obj            # use name for key
+>>> dbase.close()                        
+
+
+
+>>> import shelve
+>>> dbase = shelve.open('cast')          # reopen shelve
+>>>
+>>> dbase.keys()                         # both objects are here
+['emily', 'bob']
+>>> print dbase['emily']
+<person.Person instance at 799940>
+>>>
+>>> print dbase['bob'].tax()             # call: bob's tax
+17500.0
+
+
+
+>>> import shelve
+>>> dbase = shelve.open('cast')      # reopen shelve
+>>>
+>>> print dbase.keys()               # both objects are here
+['emily', 'bob']
+>>> print dbase['emily']
+<person.Person instance at 79aea0>
+>>>
+>>> print dbase['bob'].tax           # no need to call tax()
+21000.0

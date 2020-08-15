@@ -1,0 +1,26 @@
+#
+# scripting languages
+#
+
+<begin>
+name: Python
+roles: GUIs, Internet, System, Dbase, Text, Integration, Science
+creator: Guido van Rossum
+<end>
+
+<begin>
+name: TCL
+roles: Scripting
+creator: John Ousterhout
+<end>
+
+<begin>
+name: Ruby
+roles: Rails
+<end>
+
+<begin>
+name: Perl
+roles: System admin, Text
+creator: Larry Wall
+<end>

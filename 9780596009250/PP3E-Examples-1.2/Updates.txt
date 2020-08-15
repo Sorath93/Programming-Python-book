@@ -1,0 +1,31 @@
+This file records changes made to the book examples distribution package,
+organized by examples release number.
+
+1.0) September 19, 2006: initial release.
+
+1.1) October 5, 2006: updated release.
+     Now available in two formats: a ".zip" and a ".tgz".  Also applied a 
+     handful of example updates.  For details on all changes made, see file 
+     "pp3e-updates.html" here, or at http://www.rmi.net/~lutz/pp3e-updates.html,
+     and look for notes labeled with the date of this release.
+
+1.2) November 16, 2006: updated release
+     Non-ASCII characters:
+         Fixed non-ASCII characters in 5 files that are now treated as errors as
+         of Python 2.5.  These stem from cut-and-paste operations.  The worst of 
+         these, in threadtools.py, caused PyMailGUI to fail under 2.5 (but not 2.4).
+         See file findNonAscii.py in this directory for the fixed files list.
+     PP2E appearances:
+         Fixed lingering "PP2E" references in a handful of files to use "PP3E".
+         Only one of these was significant: a popup title in PyDemos2 which used
+         "PP2E" in both the examples tree and the book.  All others were either
+         correct in the book, or in extra examples not presented in the book.
+         See file findPP2E.py in this directory for a fixed files list.
+     Grids in PyMailGUI:
+         In PyMailGUI2, changed to use grid() instead of pack() for layout of 
+         mail header fields.  pack() skews the fields on Linux, where the fonts
+         sizes are very different than on Windows, the main test platform. 
+     New class examples
+         Added some new examples from training classes in the Examples/PP3E/Extras
+         folder.  These are supplemental, and not shown in the book.
+    For details, see "pp3e-updates.html" here, or at "http://www.rmi.net/~lutz"     

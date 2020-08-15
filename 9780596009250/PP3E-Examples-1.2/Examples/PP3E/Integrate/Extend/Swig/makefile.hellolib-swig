@@ -1,0 +1,30 @@
+##################################################################
+# Use SWIG to integrate hellolib.c for use in Python programs on
+# Cygwin.  The DLL must have a leading "_" in its name in current
+# SWIG (>1.3.13) because also makes a .py without "_" in its name.
+##################################################################
+
+PYLIB = /usr/bin
+PYINC = /usr/include/python2.4
+CLIB  = ../HelloLib
+
+# the library plus its wrapper
+_hellowrap.dll: hellolib_wrap.o $(CLIB)/hellolib.o
+	gcc -shared hellolib_wrap.o $(CLIB)/hellolib.o \
+                       -L$(PYLIB) -lpython2.4 -o $@
+
+# generated wrapper module code
+hellolib_wrap.o: hellolib_wrap.c $(CLIB)/hellolib.h
+	gcc hellolib_wrap.c -g -I$(CLIB) -I$(PYINC) -c -o $@ 
+
+hellolib_wrap.c: hellolib.i
+	swig -python -I$(CLIB) hellolib.i
+
+# C library code (in another directory)
+$(CLIB)/hellolib.o: $(CLIB)/hellolib.c $(CLIB)/hellolib.h
+	gcc $(CLIB)/hellolib.c -g -I$(CLIB) -c -o $(CLIB)/hellolib.o
+
+clean:
+	rm -f *.dll *.o *.pyc core 
+force:
+	rm -f *.dll *.o *.pyc core hellolib_wrap.c hellowrap.py

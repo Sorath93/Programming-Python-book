@@ -1,0 +1,11 @@
+<dtml-var standard_html_header>
+
+<h2>External Method call (urllib)</h2>
+<pre>
+<dtml-var expr="fetchWebPage('http://www.python.org')[:277]">
+</pre>
+
+<h2>Python script to External Method call (ftplib)</h2>
+<pre>
+<dtml-var fetchscript>
+</pre>

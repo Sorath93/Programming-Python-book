@@ -1,0 +1,13 @@
+# build environ extension from SWIG generated code 
+
+PYLIB = /usr/bin
+PYINC = /usr/include/python2.4
+
+_environ.dll: environ_wrap.c
+	gcc environ_wrap.c -g -I$(PYINC) -L$(PYLIB) -lpython2.4 -shared -o $@
+
+environ_wrap.c: environ.i
+	swig -python environ.i
+
+clean:
+	rm -f *.o *.dll *.pyc core environ_wrap.c environ.py

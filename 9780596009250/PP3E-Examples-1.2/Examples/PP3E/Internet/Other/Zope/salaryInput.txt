@@ -1,0 +1,12 @@
+<dtml-var standard_html_header>
+
+<form action="salaryResult" method=POST>
+<h2>Enter job data:</h2>
+<table>
+  <tr><td>Hours worked: <td><input name="hours:float"><br>
+  <tr><td>Pay per hour: <td><input name="rate:int"><br>
+</table><br>
+<input type="submit" value="Compute"><br>
+</form>
+ 
+<dtml-var standard_html_footer>

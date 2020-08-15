@@ -1,0 +1,11 @@
+<html>
+<body>
+<% 
+import time
+%>
+<h1>The current time is <%= time.asctime() %> </h1> 
+
+<% for i in range(5):
+         res.write("<b>This is number" + str(i) + "</b><br>") %>
+</body>
+</html>

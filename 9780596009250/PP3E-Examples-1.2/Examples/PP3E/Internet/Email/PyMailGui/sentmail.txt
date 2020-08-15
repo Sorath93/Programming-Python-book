@@ -1,0 +1,184 @@
+PyMailGUI------------------------------------------------------------PyMailGUI
+Content-Type: multipart/mixed; boundary="===============1283731434=="
+MIME-Version: 1.0
+From: lutz@rmi.net
+To: pp3e@earthlink.net
+Subject: sent file test
+Date: Mon, 04 Sep 2006 21:56:57 -0000
+X-Mailer: PyMailGUI 2.1 (Python)
+
+A multi-part MIME format message.
+
+--===============1283731434==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Testing 1 2 3...
+
+--Mark Lutz  (http://www.rmi.net/~lutz)
+
+--===============1283731434==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="PyDemos-pil-note.txt"
+
+PyPhoto requires the PIL open source Python 
+imaging library to be installed separately, 
+for image thumbnail generation, and for viewing
+of some photo types.  See the book for details,
+and search google to fetch and download PIL.
+
+--===============1283731434==--
+PyMailGUI------------------------------------------------------------PyMailGUI
+Content-Type: multipart/mixed; boundary="===============1567443993=="
+MIME-Version: 1.0
+From: lutz@rmi.net
+To: pp3e@earthlink.net
+Subject: live organ transplants
+Date: Mon, 04 Sep 2006 22:12:02 -0000
+X-Mailer: PyMailGUI 2.1 (Python)
+
+A multi-part MIME format message.
+
+--===============1567443993==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+
+--Mark Lutz  (http://www.rmi.net/~lutz)
+
+--===============1567443993==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="README.txt"
+
+Welcome to the _Programming Python 3rd Edition_ book examples
+distribution package.  In this package you will find source 
+code for all the examples in the book, along with some extras.
+
+To fetch and install the Python interpreter, please visit the
+Download link at www.python.org.  For related packages used
+in the book such as PIL, MySQL, ZODB, Zope, and SWIG, please 
+search for their latest location with Google or other web search
+engine.  The book's examples were known to work under Python 2.4 
+and 2.5 and compatible 3rd-party packages, but should generally 
+run on later Python releases as well.
+
+The Examples directory here is the book examples source code 
+directory.  It contains demo launcher scripts, a tools directory,
+and one subdirectory for each part of the book.  The PP3E 
+subdirectory here is simply one large Python module package which
+you may import from, as long as its container directory is on your
+Python module search path.
+
+Demos may be started directly from this package.  Source files are 
+distributed in DOS end-line format; see the lower directories' 
+top-level README files for conversion tools if the code looks odd
+in your Unix or Linux text editor.  Also see the book's Preface
+as well as Examples\PP3E\README-PP3E.txt here for more information.
+
+A few hints:
+
+- The "Updates.txt" file here will be updated whenever this book
+  examples package changes; see it for the most recent change.
+
+- Be sure to search the web for up-to-date releases of all 3rd party
+  packages used in the book.
+
+- Consult www.python.org for links to many other useful packages not 
+  used in the book.  See especially the Vaults of Parnassus and PyPI 
+  site links there for extra Python software.
+
+- See the book's preface for information about starting example demos
+  in this package, tips for running the book's Internet examples,
+  and more.
+
+--Mark Lutz, September 2006,  http://www.rmi.net/~lutz
+
+--===============1567443993==
+Content-Type: image/gif
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="python_conf_ora.gif"
+
+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
+rlgxmhJaUYLwqRzSIBSXrvZ6r6waAQA7
+--===============1567443993==--
+PyMailGUI------------------------------------------------------------PyMailGUI
+From: pp3e@earthlink.net
+To: pp3e@earthlink.net
+Subject: test 1.0 pkg
+Date: Tue, 19 Sep 2006 20:37:50 -0000
+X-Mailer: PyMailGUI 2.1 (Python)
+
+
+your signature

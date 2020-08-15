@@ -1,0 +1,48 @@
+>>> import anydbm                           # get interface: dbm, gdbm, ndbm,..
+>>> file = anydbm.open('movie', 'c')        # make a dbm file called 'movie'
+>>> file['Batman'] = 'Pow!'                 # store a string under key 'Batman'
+>>> file.keys()                             # get the file's key directory
+['Batman']
+>>> file['Batman']                          # fetch value for key 'Batman'
+'Pow!'
+     
+>>> who  = ['Robin', 'Cat-woman', 'Joker']
+>>> what = ['Bang!', 'Splat!', 'Wham!']
+>>> for i in range(len(who)):
+...     file[who[i]] = what[i]              # add 3 more "records"
+... 
+>>> file.keys()
+['Joker', 'Robin', 'Cat-woman', 'Batman']
+>>> len(file), file.has_key('Robin'), file['Joker']
+(4, 1, 'Wham!')
+>>> file.close()                            
+
+
+
+>>> import anydbm
+>>> file = anydbm.open('movie', 'c')        # open existing dbm file
+>>> file['Batman']                             
+'Pow!'
+     
+>>> file.keys()                             # keys gives an index list
+['Joker', 'Robin', 'Cat-woman', 'Batman']
+>>> for key in file.keys(): print key, file[key]
+... 
+Joker Wham!
+Robin Bang!
+Cat-woman Splat!
+Batman Pow!
+     
+>>> file['Batman'] = 'Ka-Boom!'             # change Batman slot
+>>> del file['Robin']                       # delete the Robin entry
+>>> file.close()                            
+
+
+
+>>> import anydbm                           # open dbm file again
+>>> file = anydbm.open('movie', 'c')
+>>> for key in file.keys(): print key, file[key]
+... 
+Joker Wham!
+Cat-woman Splat!
+Batman Ka-Boom!

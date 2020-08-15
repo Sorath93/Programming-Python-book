@@ -1,0 +1,11 @@
+>>> files = []
+>>> for (dirname, subshere, fileshere) in os.walk(r'C:\Python24'):
+	for fname in fileshere:
+		print dirname, '=>', fname
+		if fname.endswith('.py'):
+			fullname = os.path.join(dirname, fname)
+			size = os.path.getsize(fullname)
+			files.append((size, fullname))
+
+>>> files.sort()
+>>> files[-1]

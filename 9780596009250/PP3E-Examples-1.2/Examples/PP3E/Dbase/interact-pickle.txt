@@ -1,0 +1,55 @@
+>>> table = {'a': [1, 2, 3], 
+             'b': ['spam', 'eggs'], 
+             'c': {'name':'bob'}}
+>>>
+>>> import pickle
+>>> mydb  = open('dbase', 'w')
+>>> pickle.dump(table, mydb)
+
+
+
+>>> import pickle
+>>> mydb  = open('dbase', 'r')
+>>> table = pickle.load(mydb)
+>>> table
+{'b': ['spam', 'eggs'], 'a': [1, 2, 3], 'c': {'name': 'bob'}}
+
+
+
+>>> import pickle
+>>> f = open('temp', 'w')
+>>> x = ['Hello', ('pickle', 'world')]          # list wih nested tuple
+>>> pickle.dump(x, f)
+>>> f.close()                                   # close to flush changes
+>>> 
+>>> f = open('temp', 'r')
+>>> y = pickle.load(f)
+>>> y
+['Hello', ('pickle', 'world')]
+>>> 
+>>> x == y, x is y
+(True, False)
+
+
+
+>>> from filepickle import *
+>>> L = [0]
+>>> D = {'x':0, 'y':L}
+>>> table = {'A':L, 'B':D}              # L appears twice
+>>> saveDbase('myfile', table)          # serialize to file
+     
+C:\...\PP3E\Dbase>python
+>>> from filepickle import *
+>>> table = loadDbase('myfile')         # reload/unpickle
+>>> table
+{'B': {'x': 0, 'y': [0]}, 'A': [0]}
+>>> table['A'][0] = 1                   # change shared object
+>>> saveDbase('myfile', table)          # rewrite to the file
+     
+C:\...\PP3E\Dbase>python
+>>> from filepickle import *
+>>> print loadDbase('myfile')           # both L's updated as expected
+{'B': {'x': 0, 'y': [1]}, 'A': [1]}
+
+
+

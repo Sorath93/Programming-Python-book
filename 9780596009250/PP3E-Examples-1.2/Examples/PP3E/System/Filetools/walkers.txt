@@ -1,0 +1,24 @@
+>>> import os
+>>> def atEachDir(matchlist, dirname, fileshere):
+        for filename in fileshere:
+            if filename.endswith('.py'):
+                pathname = os.path.join(dirname, filename)
+                if 'Tkinter' in open(pathname).read():
+                    matchlist.append(pathname)
+				
+>>> matches = []
+>>> os.path.walk(r'D:\PP3E', atEachDir, matches)
+>>> matches
+
+
+
+>>> import os
+>>> matches = []
+>>> for (dirname, dirshere, fileshere) in os.walk(r'D:\PP3E'):
+        for filename in fileshere:
+            if filename.endswith('.py'):
+                pathname = os.path.join(dirname, filename)
+                if 'Tkinter' in open(pathname).read():
+                    matches.append(pathname)
+				
+>>> matches

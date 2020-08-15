@@ -1,0 +1,22 @@
+# cygwin makefile to build all 5 
+# basic embedding examples at once
+
+PYLIB = /usr/bin
+PYINC = /usr/include/python2.4
+
+BASICS = embed-simple.exe   \
+         embed-string.exe   \
+         embed-object.exe   \
+         embed-dict.exe     \
+         embed-bytecode.exe
+
+all:	$(BASICS)
+
+embed%.exe: embed%.o
+	gcc embed$*.o -L$(PYLIB) -lpython2.4 -g -o $@
+
+embed%.o: embed%.c
+	gcc embed$*.c -c -g -I$(PYINC)
+
+clean:
+	rm -f *.o *.pyc $(BASICS) core

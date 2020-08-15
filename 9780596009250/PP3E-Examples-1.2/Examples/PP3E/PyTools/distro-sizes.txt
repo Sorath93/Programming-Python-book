@@ -1,0 +1,75 @@
+post strip
+
+C:\Mark\PP3E-Examples-1.0>c:\python24\python
+Python 2.4 (#60, Nov 30 2004, 11:49:19) [MSC v.1310 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import os
+>>> allsizes = []
+>>> for (dir, subs, files) in os.walk('.'):
+...     for file in files:
+...         path = os.path.join(dir, file)
+...         allsizes.append((os.path.getsize(path), path))
+...
+>>> len(allsizes)
+1324
+>>> allsizes.sort()
+>>> for pair in allsizes[-10:]: print pair
+...
+(206108L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\santacruz2.JPG')
+(230188L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\London_0485.JPG')
+(264376L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\nyc2.JPG')
+(266665L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\spain08.jpg')
+(267982L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\chicago2.JPG')
+(271459L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\monterey_0382.JPG')
+(302644L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\chicago1.JPG')
+(308193L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\nyc_0278.JPG')
+(1910083L, '.\\Examples\\PP3E\\Internet\\Web\\PyErrata\\Chapter\\ch14.pdf')
+(3316452L, '.\\Examples\\PP3E\\Internet\\Email\\PyMailGui\\SavedMail\\savemany.txt')
+>>>
+>>> sum(x[0] for x in allsizes)   # +/- this file's size?..
+15290068L
+>>> sum(x[0] for x in allsizes[-10:])
+7344150L
+
+
+
+
+
+pre strip
+
+
+>>> allsizes = []
+>>> for (dir, subs, files) in os.walk('.'):
+...     for file in files:
+...         path = os.path.join(dir, file)
+...         allsizes.append((os.path.getsize(path), path))
+...
+>>> len(allsizes)
+1352
+>>> allsizes.sort()
+>>> for x in allsizes[-20:]: print x
+...
+(496249L, '.\\Examples\\PP3E\\extras\\Assorted\\BNRLOG-2.txt')
+(506556L, '.\\Examples\\PP3E\\extras\\LosAlamosAdvancedClass\\day1-system\\INTERACTIVE-LOG-1.txt')
+(723019L, '.\\Examples\\PP3E\\Ai\\TicTacToe\\temp.out.txt')
+(816477L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\carmel.JPG')
+(824356L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\London_0503.JPG')
+(1086040L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\santacruz2.JPG')
+(1109908L, '.\\Examples\\PP3E\\Internet\\Email\\PyMailGui\\SavedParts\\109_0228.JPG')
+(1109908L, '.\\Examples\\PP3E\\TempParts\\109_0228.JPG')
+(1202789L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\London_0485.JPG')
+(1255412L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\chicago2.JPG')
+(1255412L, '.\\Examples\\PP3E\\Internet\\Email\\PyMailGui\\TempParts\\109_0237.JPG')
+(1255412L, '.\\Examples\\PP3E\\TempParts\\109_0237.JPG')
+(1335733L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\monterey_0382.JPG')
+(1360028L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\nyc2.JPG')
+(1366873L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\chicago1.JPG')
+(1366873L, '.\\Examples\\PP3E\\TempParts\\109_0229.JPG')
+(1548601L, '.\\Examples\\PP3E\\Gui\\PIL\\images\\nyc_0278.JPG')
+(1910083L, '.\\Examples\\PP3E\\Internet\\Web\\PyErrata\\Chapter\\ch14.pdf')
+(5314016L, '.\\Examples\\PP3E\\Internet\\Email\\PyMailGui\\SavedMail\\savefew.txt')
+(12565779L, '.\\Examples\\PP3E\\Internet\\Email\\PyMailGui\\SavedMail\\savemany.txt')
+
+# 45M unpacked, 38M packed
+
+

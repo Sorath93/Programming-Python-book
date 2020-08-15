@@ -1,0 +1,24 @@
+# library.py
+
+class Bads(Exception): pass
+class Bad1(Bads): pass
+class Bad2(Bads): pass
+class Bad3(Bads): pass
+
+if name == 'sue':
+    raise Bad1()
+elif name.isdigit():
+    raise Bad2()
+else:
+    .....
+
+----------------------------
+
+# client.py
+
+import library
+
+try:
+    library.func()
+except Exception:
+    ...

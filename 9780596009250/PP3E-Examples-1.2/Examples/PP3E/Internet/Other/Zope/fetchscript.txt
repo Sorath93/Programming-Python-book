@@ -1,0 +1,9 @@
+# called from dtml or url, calls external method
+# gets external method in "/" by acquisistion context
+# uses ftp, returned string inserted into html reply
+
+site = 'home.rmi.net'
+directory = '.'
+login = ('lutz', 'XXXXXXXX')
+reply = context.fetchFtpFile(context, site, directory, 'mytrain.html', login,72)
+return reply

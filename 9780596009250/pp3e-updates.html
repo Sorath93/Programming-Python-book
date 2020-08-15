@@ -1,0 +1,450 @@
+<HTML>
+<HEAD>
+<TITLE>Programming Python, 3rd Edition: Updates Page</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<H1><I>Programming Python, 3rd Edition</I>: Updates Page</H1>
+
+<p>
+This page is where I collect errata, updates, and general notes about this book.
+I label items below with the date that they were added to this list, and order by 
+date.  In general, items added on or before an examples package release date have 
+been fixed in that release.  For more details, be sure to also see
+<A HREF="http://www.oreilly.com/catalog/python3/">O'Reilly's catalog page</A>, 
+where an additional list of user-reported errata is maintained.  Contents here:
+
+<UL>
+<LI><A HREF="#examples">Examples Package Releases</A>
+<LI><A HREF="#fixes">Program Fixes</A>
+<LI><A HREF="#notes">General Notes</A>
+</UL>
+</P>
+
+
+
+<HR>
+<H2><A name="examples">Examples Package Releases</A></H2>
+
+
+
+<h3>(Nov 16 '06) Version 1.2: Updated examples package</h3>
+<p>
+Updated the examples distribution package on O'Reilly's site for the following
+changes: 
+<UL>
+<LI><B>Non-ASCII characters:</B> 
+Fixed non-ASCII characters in 5 files that are now treated as errors as
+of Python 2.5.  These stem from cut-and-paste operations.  The worst of 
+these, in threadtools.py, caused PyMailGUI to fail under 2.5 (but not 2.4).
+See file findNonAscii.py in the examples package for the fixed files list.
+
+<LI><B>PP2E appearances:</B>
+Fixed lingering "PP2E" references in a handful of files to use "PP3E".
+Only one of these was significant: a popup title in PyDemos2 which used
+"PP2E" in both the examples tree and the book.  All others were either
+correct in the book, or in extra supplemental examples not presented in the
+book.  See file findPP2E.py in the examples package for a fixed files list.
+
+<LI><B>Grids in PyMailGUI:</B>
+In PyMailGUI2's ViewWindows.py, changed to use grid() instead of pack() for layout
+of mail header fields.  pack() skews the fields on Linux, where the font sizes 
+are very different than on Windows, the main test platform. 
+</UL>
+
+
+
+
+<h3>(Oct 5 '06) Version 1.1: Updated examples package</h3>
+<p>
+I've updated the examples distribution package on O'Reilly's site.  There are now
+two versions/files - a zip archive, and a tar/gzip archive.  That former is a ".zip"
+file, and the latter now has a ".tgz" filename extension to avoid renaming issues 
+(Internet Explorer can mangle extensions on downloads: it renames a ".tar.gz" to 
+".tar.tar").  I've also made a few example updates in this release: 
+
+<UL>
+<LI>Icon files were added where required by 2 examples
+<LI>Some supplemental plotter scripts were added for PyClock
+<LI>CGI script forms now use "GET" instead of "POST" for IE compatibility
+<LI>Duplicate self-test code was removed in Dstruct\Basic\typesubclasses.py
+<LI>And there were patches made for typos in "gui7.py" and "customizegui.py".  
+</UL>
+
+For more details on the changes made, see the notes below tagged with date 
+"Oct 5 '06".  As usual, the updated examples package files are available at 
+<A HREF="http://examples.oreilly.com/python3/">http://examples.oreilly.com/python3/</A>,
+or the anonymous FTP site described in the next item.
+</p>
+
+
+
+<h3>(Sep 20 '06) Version 1.0: Examples package available</h3>
+<p>
+The book examples distribution package is now available for download, 
+at <A HREF="http://examples.oreilly.com/python3/">http://examples.oreilly.com/python3/</A>.
+We're making the examples available on-line in this edition of the book, to allow for updates.
+A handful of patches were applied to the code in this release; for details, see the 
+package's "UPDATES.txt" file or the items described on this page.
+
+<p>Note that you can download over HTTP by visiting the web site
+listed above, or by anonymous FTP to ftp.oreilly.com fetching file 
+examples/python3/PP3E-Examples-1.0.tar.gz in binary mode.  Downloading by FTP may
+be quicker than the web site in some cases.
+</p>
+
+
+
+<HR>
+<H2><A name="fixes">Program Fixes</A></H2>
+
+
+
+<h3>(Nov 16 '06) Non-ASCII characters trigger errors in Python 2.5</h3>
+<p>
+In the examples release, four other files besides threadtools.py (mentioned below) 
+had non-ASCII characters from cut-and-paste operations.  These are now treated as 
+syntax errors as of Python 2.5, and so were fixed in release 1.2 of the examples 
+tree.  They are not an issue in the book itself.  See the 1.2 release details above
+for more information.
+
+
+
+<h3>(Nov 16 '06) Lingering "PP2E" appearances</h3>
+<p>
+In addition to textEditor.py (described below), a few other files in the examples 
+tree also had old "PP2E" references.  Only one was significant -- a popup window 
+title in the PyDemos2 launcher.  Others were either in extra supplemental examples
+not shown in the book, or correctly use "PP3E" in the book but not in the examples 
+tree.  All were repaired in the 1.2 examples release.  See the 1.2 release details 
+above for more information.
+</p>
+
+
+
+<h3>(Nov 16 '06) Using grid() instead of pack() in PyMailGUI headers</h3>
+<p>
+On Linux, the pack() method used to lay out mail headers at the top of PyMailGUI 
+View windows seems to get skewed under Linux, because of the very different font
+sizes.  The From/To/etc. labels don't align with the corresponding display fields,
+because they are packed into a separate Frame.  Using the grid() method makes for
+a more platform-neutral appearance.  
+
+<p>This isn't quite a bug and doesn't merit a new PyMailGUI version, but grid() 
+does provide a more regular layout for this kind of form.  Even on Windows, there 
+can be a very slight skewing of the labels in Write windows with pack().  This 
+example was changed to use grid() in examples release 1.2, though it will still 
+use pack() in the book itself.  See file ViewWindows.py in PyMailGUI2 for details; 
+the original pack() version code is still present, but commented-out.
+</p>
+
+
+
+
+<h3>(Oct 11 '06) Non-ASCII in threadtools.py makes PyMailGUI fail in Python 2.5</h3>
+<p>
+In the book examples distribution package, there apparently is a non-ASCII
+character on line 9 of file threadtools.py, in the PP3E/GUI/Tools directory.
+Unfortunately, this causes this file, as well as its PyMailGUI client, to fail
+under Python 2.5 as is.  This is due to a change in Python itself; the examples in 
+question work fine with 2.4.  It isn't an issue in the book itself, but will be
+repaired in the next examples package version.
+
+<p>The character probably came from cutting and pasting the code from the book's 
+Word doc file, and is not a problem under Python 2.4.  However, Python 2.5 now
+treats this as an error for some reason (there is a PEP about this change if you 
+want to look into it further).  To fix, delete the "-" on line 9 of file
+threadtools.py, in the line that begins with "# same time - each kind".  
+It's not impossible that other non-ASCII characters may exist in other files (TBD).
+
+<P>Update: this was fixed in examples release 1.2, November '06 (described above).
+</p>
+
+
+
+<h3>(Oct 5 '06) Extra right parenthesis in GUI tutorial example</h3>
+<p>
+Page 413, example 8-24, "gui7.py': There is a superfluous extra ")" in the
+header of the "message" method, of unknown origins.  At  "))" in the 5th line 
+down on this page, delete the second ")".  This was fixed in the examples 
+distribution package (version 1.1), but not in the book.
+</p>
+
+
+
+<h3>(Oct 5 '06) Missing import statement in preview GUI example</h3>
+<p>
+Page 63, example 2-27, customizegui.py: The "from Tkinter import *" line at the
+very top of this example is missing in the book (the result of an unfortunate cut
+and paste, apparently). Without it, the "mainloop()" call at the end is undefined.  
+This was fixed in the examples distribution package (version 1.1), but not in the book.
+</p>
+
+
+
+<h3>(Oct 5 '06) CGI forms changed to use "GET" instead of "POST"</h3>
+<p>
+As described ahead, Internet Explorer may have issues when using POST to submit
+data to CGI scripts, using the web server in the book.  This is an issue only with 
+the combination of the POST transmission method, the IE web browser, and the simple
+server used in the book.  To avoid the issue, most of the HTML forms have been changed
+to use GET instead of POST in the examples distribution package (version 1.1), though
+not in the book itself.  Exception: the putfile.html upload form still requires POST 
+(see page 1054 in the text for details).  The PyMailCGI email edit form must use POST
+for attachments too, for the same reasons.  
+
+<p>Curiously, both the putfile and PyMailCGI
+examples work fine with POST, under the book's web server and the IE browser; their 
+"enctype" attribute apparently matters in this context, but it's unclear why.  Another
+finding: under Python 2.5, it appears the webserver used in the book has occaional 
+issues with GET and the Firefox web browser; this seems fairly bizarre, and I have no time
+to uncover why.  Try changing between GET and POST if the examples don't work for you,
+or use a more robust web server such as Apache. 
+</p>
+
+
+
+<h3>(Sep 20 '06) Extraneous "&lt;form&gt;" tag in CGI tutorial</h3>
+<p>
+Page 1010, example 16-15: There seems to be an extra and superfluous "&lt;form&gt;" tag 
+in this HTML file; you may have to delete one of the two to make this example work.  
+This was fixed in the examples distribution package, but not in the book.
+</p>
+
+
+
+<h3>(Sep 20 '06) Change "PP2E" to "PP3E" in textEditor.py</h3>
+<p>
+PyEdit, example 12-3 on page 646, has a legacy import of the form "from PP2E.Gui.Tools..."
+which must be "from PP3E.Gui.Tools..." in order to run.  This was fixed in the examples 
+distribution, but not in the book.  It reflects the fact that the examples were scattered
+between two directory trees during development of this edition; this reference slipped 
+through the cracks when the trees were merged.
+</p>
+
+
+
+<h3>(Sep 20 '06) IE may require "GET" instead of "POST" in forms</h3>
+<p>
+Some CGI examples in preview Chapter 2 and other server-side scripting examples in the Internet
+part may not work as is with Internet Explorer and the book's webserver script.  Internet 
+Explorer appears to have problems with "POST" form actions, when talking to the Python 
+coded locally-running webserver.py script used in the book.  To make them work under IE
+and this server, you may have to change the HTML file's form "action" to be "GET" instead of 
+"POST".  Alternatively, you can use the Firefox web browser which was used for testing, and 
+which handles all the examples correctly, or run a different web server such as Apache.  
+Action tags were changed to "GET" in the Preview directory of the examples distribution, 
+but nowhere else.  (Also see the Oct 5 update above: most examples now use GET.)
+</p>
+
+
+
+
+<HR>
+<H2><A name="notes">General Notes</A></H2>
+
+
+
+<h3>(Nov 16 '06) Examples usage notes</h3>
+<p>
+These are not program errors and were not patched in the examples tree, but
+four examples tree usage notes are worth mentioning here.  
+<UL>
+<LI><B>Running auto-launchers outside Windows -- CWD:</B> 
+The auto-launcher scripts in the top-level "Examples/PP3E" directory (e.g., 
+"Launch_PyDemos.pyw") tend to work best when they are launched within that directory.
+They must find the README file there, to set the import path.  To find this file,
+they search the current working directory (CWD) first on all platforms, then traverse
+a handful of platform-specific common directory trees, which may or may not contain the
+file on some machines.  To guarantee success, make sure you run these scripts from the 
+directory they reside in.  This is always true when their icons are clicked on Windows, 
+but you may need to "cd" to their directory in order to launch them on Linux or Macs from
+a command-line in order to exploit the CWD search.  Alternatively, configure your 
+PYTHONPATH to include the "Examples" root manually (as suggested by the error 
+message on search failures), or edit the searched directory lists in guessLocation()
+in Examples/PP3E/Launcher.py.<BR><BR>
+
+<LI><B>DOS line-ends may break CGI scripts on UNIX:</B>
+Some web servers or clients on Linux/UNIX platforms may have problems 
+with the fact that the CGI scripts in the examples tree all follow DOS '\r\n' 
+line-end conventions (the examples tree was created on Windows).  On UNIX-like 
+platforms, you may need to run the Python CGI scripts through a converter such as 
+"dos2unix script.py" to make them work.  There are also line-end converters for the
+entire tree in the top-level "PyTools" directory of the tree itself; see 
+PyTools/fixeoln_all.py in the tree and the Sytem utilities chapter of the book for 
+more details.  The server-side scripting chapter also mentions this issue in its 
+CGI script install issues section.<BR><BR>
+
+<LI><B>PyMailGUI temp file issues if run from a CD:</b>
+You probably want to copy the example package tree to your hard drive, if you have 
+obtained it on CD.  The PyMailGUI program, for example, writes temporary files
+in its own directory to handle attachment parts.  This won't work if it is run directly 
+off a CD, because CDs are read-only.  The examples package is online instead of on 
+CD, of course, so this shouldn't normally be an issue.  Also note that PyMailGUI
+could be changed to use temporary files located elsewhere, but this has not been 
+added to the code.<BR><BR>
+
+<LI><B>PyDemos web server launch may fail:</B>
+The PyDemos2 example laumcher (and Launch_PyDemos.pyw, which auto configs and runs
+PyDemos2) tries to launch a locally-running and Python-coded web server on your 
+machine, for running the browser-based web examples.  On some platforms this may not
+work: your network ports may be locked down.  This doesn't cause PyDemos2 to fail, 
+but without a server the browser-based examples PyDemos2 launches won't run properly.
+Moreover, PyDemos2 may leave web servers running in the background which can 
+interfere with your own work; to disable this feature, see the PyDemos2.pyw code.
+</UL>
+</p>
+
+
+
+<h3>(Oct 14 '06) Header line mangled in Chapter 24, page 1518</h3>
+<p>
+The header [So What's "Python: The Sequel"?] was not supposed to have any 
+quotes in it (they were added in the edit process).  It should be 
+[So What's Python: The Sequel] as it was in the prior edition.  I'm probably
+being picky here, but the quotes modify the original meaning of this enough 
+to mention; it's a backreference to a sidebar in the preface of the same title.
+</p>
+
+
+
+<h3>(Oct 5 '06) Missing icon files in examples package</h3>
+<p>
+Some GUI examples will not run without an icon file present (e.g., toplevel2.py, 
+tkinter103.py).  To make them run, icon files have been added to the examples 
+distribution package (version 1.1).  However, note that the examples in question 
+assume that a Windows style ".ico" icon file is being employed; on other platforms, 
+you may have still to adjust the icon file name both in the scripts and externally.
+Larger examples that use custom icons should generally work as is on non-Windows 
+platforms, but may not display an icon. 
+</p>
+
+
+
+<h3>(Oct 5 '06) Missing clock plotter scripts added back to examples package</h3>
+<p>
+The book makes reference to some text-based circle plotting scripts when discussing
+the PyClock example; these were added back to the examples distribution package
+(version 1.1).
+</p>
+
+
+
+<h3>(Sep 20 '06) Bogus calculator.py comment</h3>
+<p>
+PyCalc, example 21-6 on page 1390, has a comment near the top about using windows.py
+to get a window icon.  In the end, this change was not made tio this code.  This comment
+was removed in the examples distribution, but not in the book.
+</p>
+
+
+
+<h3>(Sep 20 '06) Example file label updates</h3>
+<p>
+A few example's file labels are slightly off, though the files' true locations are usually 
+implied by the text or usage examples.  Examples 19-25 through 19-28 are actually in the 
+TableBrowser subdirectory of PyForm; Example 18-19 is really file comserver-test-vbs.html;
+and in Chapter 17, all the imported ".py" module files in PyMailCGI are actually stored 
+in the PyMailCgi\cgi-bin subdirectory along with the CGI scripts, as described in the text.
+The latter will work either way on Windows with the server used in the book, but placing
+modules in the cgi-bin directory make imports from CGI scripts work more portably; on other
+platforms that spawn scripts, cgi-bin will be the current working directory for imports.
+All file locations are correct in the examples distribution.
+</p>
+
+
+
+<h3>(Sep 20 '06) XML and text processing</h3>
+<p>
+The XML parsing coverage shows up in the Internet section in this edition; in retrospect, 
+it should probably have been referenced from the text processing chapter as well.  XML 
+processing is not necessarily tied to Internet scripting alone.
+</p>
+
+
+
+<h3>(Sep 20 '06) A few lingering .readlines() calls</h3>
+<p>
+There are a few places in the text where the file ".readlines()" method is called in "for"
+loops.  These are legacy code.  In general, it's better practice today to omit the 
+".readlines()" part, and rely on file iterators, as discussed in Chapter 4, page 146.  This
+is true for both normal files, as well as file objects returned by the "os.popen" shell 
+command spawner.  File iterators save space in general, because the entire file is not
+loaded into memory all at once.  They are even more important for "os.popen" because the
+file iterator will allow your script to be interleaved in time with the spawned command,
+but ".readlines()" will block until the command generates all its output and exits.
+</p>
+
+
+
+<h3>(Sep 20 '06) Two database directories in examples package</h3>
+<p>
+Note that there are now two directories of database-related code in the examples
+distribution: "Database" is for SQL and ZODB database examples which require 3rd-party 
+extensions, and "Dbase" contains examples that use Python standard library tools such as
+pickle and shelve.
+</p>
+
+
+
+<h3>(Sep 20 '06) Type subclass example has no file label, duplicate output</h3>
+<p>
+In Chapter 20, page 1304, a type subclassing example appears without a filename label.
+In the examples distribution, this code is in file typesubclasses.py.  The following example
+has no label either, but its use case implies that it is in typesubclass.py.  Also note that 
+in the first release of the examples distribution, typesubclasses.py's self-test code 
+appears twice due to a bad cut-and-paste; it simply generates duplicate outputs
+(update: this was fixed in version 1.1 of the examples package.)
+</p>
+
+
+
+<h3>(Sep 20 '06) LaunchBrowser is a .pyw, not a .py</h3>
+<p>
+The extension for LaunchBrowser (Example 6-15) is .pyw in the examples distribuion, not a 
+.py as shown in the book.  Also, in PyDemos2, I added a few related files to the code list 
+of PyInternet, and one related file to PyForm's list (additional source files pop up).
+</p>
+
+
+
+<h3>(Sep 20 '06) Image files shrunk for examples distribution</h3>
+<p>
+The image files shown for the PyPhoto and email attachment examples in the book were
+reduced in the examples distribution package to save space. Use your own photos to 
+experiment further with these tools.
+</p>
+
+
+
+<h3>(Sep 20 '06) Sentence mangled in Chapter 1, page 5, paragraph 2</h3>
+<p>
+The original wording in this pararaph was mangled somewhere between the QC1 and QC2
+phases of the edit process.  The sentence: 
+
+<p>"And although Python is <i>dynamically</i> typed -- types
+are tracked automatically instead of being declared (it is still <i>strongly</i> typed) -- every 
+operation is sanity checked as your program runs." 
+
+<p>Was original written as: 
+
+<p>"And although Python is <i>dynamically</i> typed -- types are tracked automatically
+instead of being declared, it is still <i>strongly</i> typed -- every operation is 
+sanity checked as your program runs."
+
+<p>The modified version works in a way, but is difficult to parse, and subtly different
+enough from its original intent to be broken.  Technical writing can be a very tricky 
+affair.
+</p>
+
+
+
+<hr>
+<P>
+<I>Back to the <A HREF="about-pp3.html">Programming Python 3rd Edition page</A></I><BR>
+<I>Back to my <A HREF="index.html">homepage</A></I><BR>
+</P>
+
+</BODY>
+</HTML>
